@@ -8,8 +8,10 @@ module tt_um_Fiona_CMU (
   input  logic       clk,
   input  logic       rst_n);
 
-  logic [7:0]       out, ct, index, lsr_low, lsr_high;
+  logic [7:0]       out;
+  logic [2:0]       ct;
   logic             view, inc;
+
   logic [63:0] lsr;
   //max 8 characters (bytes) can be held at a time
   //pushing beyond this limit will lose previous characters
