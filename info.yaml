@@ -28,37 +28,48 @@ documentation:
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      Explain how your project works
+      Holds an internal linear shift register of eight bytes.
+
+      When encrypting, each increment of IO_0 takes in the byte currently on the inputs, XORs it with the most recent byte stored in the LSR, and then puts it into the LSR.
+
+      When not encrypting, the message can be viewed by putting an index zero to seven on the inputs. The output will either be the encrypted message or the decrypted message, based on I0_2.
+
+      The LSR can only be reset with the rst_n signal. If more than sixteen bytes are inputted into the LSR without resetting, encrypted bytes will be lost, meaning the decryption of the last byte will not be accurate.
+
+      You can toggle between encryption and viewing the message with IO_1. You do not have to finish inputting the message before viewing the current encryption.
 
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
-      Explain how to test your project
+      Set IO_1 to high to indicate encryption. Place a number on the input. Set the IO_0 to high to put it into the LSR. Set the IO_0 to low before adding the next number. Repeat up to seven times.
 
+      Set IO_1 to low to view the message. Use IO_2 to toggle between viewing the message encrypted (high) or decrypted (low). Use the input to indicate the index of the message you want to view.
+
+      Reset to place a new message on the LSR.
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
+    - bit0
+    - bit1
+    - bit2
+    - bit3
+    - bit4
+    - bit5
+    - bit6
+    - bit7
 # A description of what the outputs do (e.g. status LED, SPI MISO, etc)
   outputs:
-    - segment a
-    - segment b
-    - segment c
-    - segment d
-    - segment e
-    - segment f
-    - segment g
-    - dot
+    - bit0
+    - bit1
+    - bit2
+    - bit3
+    - bit4
+    - bit5
+    - bit6
+    - bit7
 # A description of what the bidirectional I/O pins do (e.g. I2C SDA, I2C SCL, etc)
   bidirectional:
-    - none
-    - none
-    - none
+    - inc    (indicate that input to encryption is valid)
+    - encrypt
+    - view   (high shows encrypted message, low shows decrpted message)
     - none
     - none
     - none
@@ -66,7 +77,7 @@ documentation:
     - none
 
 # The following fields are optional
-  tag:          ""      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
+  tag:          "encryption"      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
   external_hw:  ""      # Describe any external hardware needed
   discord:      ""      # Your discord handle, used for communication and automatically assigning tapeout role after a submission
   doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository

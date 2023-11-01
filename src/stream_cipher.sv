@@ -45,26 +45,26 @@ module tt_um_Fiona_CMU (
     else begin
      if (view) begin
        //viewing encrypted message
-       if      (ct == 0) out <= lsr[7:0];
-       else if (ct == 1) out <= lsr[15:8];
-       else if (ct == 2) out <= lsr[23:16];
-       else if (ct == 3) out <= lsr[31:24];
-       else if (ct == 4) out <= lsr[39:32];
-       else if (ct == 5) out <= lsr[47:40];
-       else if (ct == 6) out <= lsr[55:48];
-       else              out <= lsr[63:56];
-      end
+       if      (ct == 0)  out <= lsr[7:0];
+       else if (ct == 1)  out <= lsr[15:8];
+       else if (ct == 2)  out <= lsr[23:16];
+       else if (ct == 3)  out <= lsr[31:24];
+       else if (ct == 4)  out <= lsr[39:32];
+       else if (ct == 5)  out <= lsr[47:40];
+       else if (ct == 6)  out <= lsr[55:48];
+       else               out <= lsr[63:56];
+   end
      else begin
        //viewing decrypted message
-       if      (ct == 0) out <= lsr[7:0]   ^ lsr[15:8];
-       else if (ct == 1) out <= lsr[15:8]  ^ lsr[23:16];
-       else if (ct == 2) out <= lsr[23:16] ^ lsr[31:24];
-       else if (ct == 3) out <= lsr[31:24] ^ lsr[39:32];
-       else if (ct == 4) out <= lsr[39:32] ^ lsr[47:40];
-       else if (ct == 5) out <= lsr[47:40] ^ lsr[55:48];
-       else if (ct == 6) out <= lsr[55:48] ^ lsr[63:56];
-       else              out <= lsr[63:56];
-     end
+       if      (ct == 0)  out <= lsr[7:0]   ^ lsr[15:8];
+       else if (ct == 1)  out <= lsr[15:8]  ^ lsr[23:16];
+       else if (ct == 2)  out <= lsr[23:16] ^ lsr[31:24];
+       else if (ct == 3)  out <= lsr[31:24] ^ lsr[39:32];
+       else if (ct == 4)  out <= lsr[39:32] ^ lsr[47:40];
+       else if (ct == 5)  out <= lsr[47:40] ^ lsr[55:48];
+       else if (ct == 6)  out <= lsr[55:48] ^ lsr[63:56];
+       else               out <= lsr[63:56];
+      end
     end
   end
 endmodule: tt_um_Fiona_CMU
